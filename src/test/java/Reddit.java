@@ -1,5 +1,3 @@
-package de.joshizockt.redditapi;
-
 import de.joshizockt.redditapi.objects.RedditPost;
 import de.joshizockt.redditapi.request.Statics;
 import de.joshizockt.redditapi.request.SubredditHotRequest;

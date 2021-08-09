@@ -17,6 +17,10 @@ public class SubredditHotRequest extends Request<List<RedditPost>> {
     private String subreddit;
     private int amount;
 
+    public SubredditHotRequest(SubReddit subReddit, int amount) {
+        this(subReddit.getName(), amount);
+    }
+
     public SubredditHotRequest(String subreddit, int amount) {
         this.subreddit = subreddit;
         this.amount = amount;
@@ -86,6 +90,11 @@ public class SubredditHotRequest extends Request<List<RedditPost>> {
                     @Override
                     public boolean isVideo() {
                         return false;
+                    }
+
+                    @Override
+                    public JsonObject json() {
+                        return e;
                     }
 
                 };

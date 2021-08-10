@@ -1,7 +1,6 @@
 package de.joshizockt.redditapi.objects;
 
 import com.google.gson.JsonObject;
-import com.sun.istack.internal.Nullable;
 
 import java.net.URL;
 import java.util.List;

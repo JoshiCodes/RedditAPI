@@ -3,9 +3,11 @@ Simple Java Library for the Reddit Rest API
 <br>
 <hr>
 <br>
-<a href="#download">Download</a><br>
-<a href="#usage">Usage</a><br>
-<a href="https://github.com/JoshiCodes/RedditAPI/wiki">Wiki</a>
+<ul>
+    <li><a href="#download">Download</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="https://github.com/JoshiCodes/RedditAPI/wiki">Wiki</a></li>
+</ul>
 <br>
 <hr>
 <section id="download">

@@ -13,6 +13,7 @@ public interface RedditPost {
     List<URL> getMediaUrls();
     String getPermaLink();
     boolean isVideo();
+    String getUrl();
 
     JsonObject json();
 

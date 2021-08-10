@@ -6,5 +6,8 @@ public interface PostInfo {
     String getTitle();
     int getUpvotes();
     int getDownvotes();
+    int getComments();
+    int getScore();
+    boolean isNsfw();
 
 }

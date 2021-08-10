@@ -65,6 +65,21 @@ public class SubredditHotRequest extends Request<List<RedditPost>> {
                         return e.get("downs").getAsInt();
                     }
 
+                    @Override
+                    public int getComments() {
+                        return e.get("num_comments").getAsInt();
+                    }
+
+                    @Override
+                    public int getScore() {
+                        return e.get("score").getAsInt();
+                    }
+
+                    @Override
+                    public boolean isNsfw() {
+                        return e.get("over_18").getAsBoolean();
+                    }
+
                 };
                 RedditPost post = new RedditPost() {
                     @Override
@@ -95,6 +110,11 @@ public class SubredditHotRequest extends Request<List<RedditPost>> {
                     @Override
                     public boolean isVideo() {
                         return false;
+                    }
+
+                    @Override
+                    public String getUrl() {
+                        return e.get("url").getAsString();
                     }
 
                     @Override

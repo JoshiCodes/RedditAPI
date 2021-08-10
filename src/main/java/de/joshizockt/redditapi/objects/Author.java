@@ -1,4 +1,7 @@
 package de.joshizockt.redditapi.objects;
 
-public class Author {
+public interface Author {
+
+    String getName();
+
 }

@@ -31,14 +31,19 @@ public class SubredditHotRequest extends Request<List<RedditPost>> {
     }
 
     @Override
-    public RestAction<List<RedditPost>> complete() {
+    public RestAction<List<RedditPost>> execute() {
         JsonObject json = makeCall().complete(Throwable::printStackTrace);
         RestAction<List<RedditPost>> action = new RestAction<>();
         action.setContext(() -> {
             List<RedditPost> list = new ArrayList<>();
             for(JsonElement o : json.get("data").getAsJsonObject().getAsJsonArray("children")) {
                 JsonObject e = o.getAsJsonObject().get("data").getAsJsonObject();
-                Author author = new Author();
+                Author author = new Author() {
+                    @Override
+                    public String getName() {
+                        return e.get("author_fullname").getAsString();
+                    }
+                };
                 PostInfo postInfo = new PostInfo() {
                     @Override
                     public Author getAuthor() {

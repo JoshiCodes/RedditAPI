@@ -13,7 +13,7 @@ import java.net.URL;
 public abstract class Request<T> {
 
     public abstract String getPath();
-    public abstract RestAction<T> complete();
+    public abstract RestAction<T> execute();
 
     public RestAction<JsonObject> makeCall() {
         return new RestAction<JsonObject>().setContext(() -> makeCall(Statics.REDDIT_BASE_URL));

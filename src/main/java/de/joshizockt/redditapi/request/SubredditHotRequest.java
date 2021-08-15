@@ -84,7 +84,7 @@ public class SubredditHotRequest extends Request<List<RedditPost>> {
                 RedditPost post = new RedditPost() {
                     @Override
                     public SubReddit getSubreddit() {
-                        return new SubReddit(e.get("subreddit").getAsString());
+                        return new SubReddit(e.get("subreddit").getAsString(), e.get("subreddit_id").getAsString(), e.get("subreddit_type").getAsString().equals("public"));
                     }
 
                     @Override

@@ -1,5 +1,6 @@
 package de.joshizockt.redditapi.request;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import de.joshizockt.redditapi.RestAction;
@@ -25,6 +26,18 @@ public abstract class Request<T> {
         con.setRequestProperty("Content-Type", "application/json; utf-8");
         con.setRequestProperty("User-Agent", Statics.USER_AGENT);
         return JsonParser.parseReader(new InputStreamReader((InputStream) con.getContent())).getAsJsonObject();
+    }
+
+    public RestAction<JsonElement> makeCallAsElement() {
+        return new RestAction<JsonElement>().setContext(() -> makeCallAsElement(Statics.REDDIT_BASE_URL));
+    }
+
+    public JsonElement makeCallAsElement(String host) throws IOException {
+        URL url = new URL(host + getPath());
+        HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+        con.setRequestProperty("Content-Type", "application/json; utf-8");
+        con.setRequestProperty("User-Agent", Statics.USER_AGENT);
+        return JsonParser.parseReader(new InputStreamReader((InputStream) con.getContent()));
     }
 
 }

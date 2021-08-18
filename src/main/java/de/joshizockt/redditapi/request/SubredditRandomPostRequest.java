@@ -1,5 +1,6 @@
 package de.joshizockt.redditapi.request;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.joshizockt.redditapi.RestAction;
@@ -29,11 +30,22 @@ public class SubredditRandomPostRequest extends Request<RedditPost> {
         JsonElement json = makeCallAsElement().complete(Throwable::printStackTrace);
         RestAction<RedditPost> action = new RestAction<>();
         action.setContext(() -> {
-                JsonObject e = json.getAsJsonArray().get(0).getAsJsonObject().get("data").getAsJsonObject().get("children").getAsJsonArray().get(0).getAsJsonObject().get("data").getAsJsonObject();
+                JsonObject e;
+
+                if(json instanceof JsonArray) {
+                    e = json.getAsJsonArray().get(0).getAsJsonObject();
+                } else {
+                    e = json.getAsJsonObject();
+                }
+
+                e = e.get("data").getAsJsonObject().get("children").getAsJsonArray().get(0).getAsJsonObject().get("data").getAsJsonObject();
+
+                final JsonObject object = e;
+
                 Author author = new Author() {
                     @Override
                     public String getName() {
-                        return e.get("author_fullname").getAsString();
+                        return object.get("author_fullname").getAsString();
                     }
                 };
                 PostInfo postInfo = new PostInfo() {
@@ -44,39 +56,39 @@ public class SubredditRandomPostRequest extends Request<RedditPost> {
 
                     @Override
                     public String getTitle() {
-                        return e.get("title").getAsString();
+                        return object.get("title").getAsString();
                     }
 
                     @Override
                     public int getUpvotes() {
-                        return e.get("ups").getAsInt();
+                        return object.get("ups").getAsInt();
                     }
 
                     @Override
                     public int getDownvotes() {
-                        return e.get("downs").getAsInt();
+                        return object.get("downs").getAsInt();
                     }
 
                     @Override
                     public int getComments() {
-                        return e.get("num_comments").getAsInt();
+                        return object.get("num_comments").getAsInt();
                     }
 
                     @Override
                     public int getScore() {
-                        return e.get("score").getAsInt();
+                        return object.get("score").getAsInt();
                     }
 
                     @Override
                     public boolean isNsfw() {
-                        return e.get("over_18").getAsBoolean();
+                        return object.get("over_18").getAsBoolean();
                     }
 
                 };
             return new RedditPost() {
                 @Override
                 public SubReddit getSubreddit() {
-                    return new SubReddit(e.get("subreddit").getAsString(), e.get("subreddit_id").getAsString(), e.get("subreddit_type").getAsString().equals("public"));
+                    return new SubReddit(object.get("subreddit").getAsString(), object.get("subreddit_id").getAsString(), object.get("subreddit_type").getAsString().equals("public"));
                 }
 
                 @Override
@@ -96,7 +108,7 @@ public class SubredditRandomPostRequest extends Request<RedditPost> {
 
                 @Override
                 public String getPermaLink() {
-                    return e.get("permalink").getAsString();
+                    return object.get("permalink").getAsString();
                 }
 
                 @Override
@@ -106,12 +118,12 @@ public class SubredditRandomPostRequest extends Request<RedditPost> {
 
                 @Override
                 public String getUrl() {
-                    return e.get("url_overridden_by_dest").getAsString();
+                    return object.get("url_overridden_by_dest").getAsString();
                 }
 
                 @Override
                 public JsonObject json() {
-                    return e;
+                    return object;
                 }
 
             };

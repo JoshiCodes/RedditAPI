@@ -13,7 +13,7 @@ Simple Java Library for the Reddit Rest API
 <section id="download">
 <h2>Download</h2>
 <h3>To add the RedditAPI to your maven project, use the following dependency in your pom.xml:</h3>
-    <a alt="Version:"><img src="https://img.shields.io/github/v/release/JoshiCodes/RedditAPI?include_prereleases"></a>
+    <a alt="Version:"><img src="https://img.shields.io/github/v/release/JoshiCodes/RedditAPI"></a>
 <pre>
     <code>
     &ltdependency>

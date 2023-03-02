@@ -1,3 +1,7 @@
+# THIS API IS OUTDATED!
+# A NEW VERSION IS AVAILABLE AT https://github.com/JoshiCodes/JRA
+# (Still not finished, but better than this one)
+
 # RedditAPI
 Simple Java Library for the Reddit Rest API
 <br>
